@@ -2,6 +2,8 @@
 
 A library for creating layers for React native, helpful with things like modals, menus etc.
 
+![](assets/layers-react-native.gif)
+
 ## Installation
 
 ```sh

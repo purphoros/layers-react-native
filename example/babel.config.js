@@ -7,7 +7,8 @@ module.exports = function(api) {
         "alias": {
           "layers-react-native": "../src/index"
         }
-      }]
+      }],
+      'react-native-reanimated/plugin'
     ]
   };
 };
