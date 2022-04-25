@@ -1,6 +1,6 @@
 {
   "name": "layers-react-native",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Manage layers in react native",
   "license": "MIT",
   "author": "Benjamin C. Tehan <purphoros@devforge.org>",
