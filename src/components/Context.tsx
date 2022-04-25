@@ -1,6 +1,5 @@
 import React, { useMemo, useState, useCallback, useContext, createContext, useRef, useEffect, cloneElement, FC, ReactElement, isValidElement } from 'react';
 import ActiveLayers from './ActiveLayers';
-import { v4 as uuidv4 } from 'uuid';
 
 export const MINIMIZED_FLAG = 0;
 export const MAXIMIZED_FLAG = 1;
@@ -39,6 +38,22 @@ export const useLayer = () => {
   }
   return context;
 };
+
+export const uuidv4 = () => {
+  var d = new Date().getTime();
+  var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c: any) => {
+    var r = Math.random() * 16;
+    if (d > 0) {
+      r = (d + r)%16 | 0;
+      d = Math.floor(d/16);
+    } else {
+      r = (d2 + r)%16 | 0;
+      d2 = Math.floor(d2/16);
+    }
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
 
 interface Props {
   children: React.ReactNode

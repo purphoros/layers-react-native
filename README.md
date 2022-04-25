@@ -10,70 +10,52 @@ npm install layers-react-native
 
 ## Setup
 
-### Add LayersProvider to root of the app
+### Example
 
-Import `LayersProvider` from `layers-react-native` and add it as a root item.
-
-```jsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { LayersProvider } from 'layers-react-native';
-import App from './App';
-
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-
-root.render(
-  <React.StrictMode>
-    <LayersProvider>
-      <App />
-    </LayersProvider>
-  </React.StrictMode>
-);
-```
-
-## Layers
-
-From here you can create new layers, close them or minimize/maximize them.
-
-### useLayer
-
-
-### Create layer - createLayer
-
-Import `useLayer` from `layers-react-native` and use `createLayer` to create a new layer.
+See example folder for a basic example app using expo.
 
 ```jsx
-import { useLayer } from 'layers-react-native';
+import { StatusBar } from 'expo-status-bar';
+import { Button, StyleSheet, Text, View } from 'react-native';
+import { LayersProvider, useLayer } from 'layers-react-native';
 
-const Component = () => {
-  const { createLayer } = useLayer();
+const Page = () => {
+  const { createLayer, closeLayerByUuid } = useLayer();
 
-  const Modal = () => <div style={{ position: "relative", width: "400px", padding: "12px", backgroundColor: "#FFF" }}>Modal</div>
+  const Modal = ({ layerUuid }: any) => <View style={{ width: 250, padding: 12, backgroundColor: "#FFF" }}>
+    <Text>Modal</Text>
+    <Button title="close" onPress={() => closeLayerByUuid(layerUuid)} />
+  </View>
 
-  const onClick = () => {
+  const onPress = () => {
     createLayer({
       orientation: "modal",
       component: <Modal />
     });
   }
 
-  return <button onClick={onClick}>Open</button>
+  return <View style={styles.container}>
+    <Button title="Create modal" onPress={onPress} />
+  </View>
 }
 
-export default Component;
-```
+export default function App() {
+  return (
+    <LayersProvider>
+      <View style={styles.container}>
+        <Page />
+        <StatusBar style="auto" />
+      </View>
+    </LayersProvider>
+  );
+}
 
-### Close layer
-
-When you create a layer `layerUuid` is attached to the props of the component that can be used for actions such as closing that layer.
-
-```js
-  const { createLayer, closeLayerByUuid } = useLayer();
-
-  const Modal = ({ layerUuid }) => <div style={{ position: "relative", width: "400px", padding: "12px", backgroundColor: "#FFF" }}>
-    <div>Modal</div>
-    <button onClick={() => closeLayerByUuid(layerUuid)}>Close</button>
-  </div>
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 ```
