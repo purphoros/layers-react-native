@@ -23,6 +23,7 @@ export interface Context {
     closeAllLayers: () => void;
 }
 export declare const useLayer: () => Context;
+export declare const uuidv4: () => string;
 interface Props {
     children: React.ReactNode;
 }
